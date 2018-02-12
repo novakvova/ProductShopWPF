@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9FF316BE-1B4C-4D19-8904-022618963E4C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>ConsoleAppEntityFW</RootNamespace>
+    <AssemblyName>ConsoleAppEntityFW</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Bogus, Version=22.0.2.0, Culture=neutral, PublicKeyToken=fa1bb3f3f218129a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Bogus.22.0.2\lib\net40\Bogus.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Abstract\IFilterNameGroupsRepository.cs" />
+    <Compile Include="Abstract\IFilterNameRepository.cs" />
+    <Compile Include="Abstract\IProductImageRepository.cs" />
+    <Compile Include="Abstract\IProductRepository.cs" />
+    <Compile Include="Concrete\FilterNameGroupsRepository.cs" />
+    <Compile Include="Concrete\FilterNameRepository.cs" />
+    <Compile Include="Abstract\IFilterValueRepository.cs" />
+    <Compile Include="Concrete\FilterValueRepository.cs" />
+    <Compile Include="Concrete\ProductImageRepository.cs" />
+    <Compile Include="Concrete\ProductRepository.cs" />
+    <Compile Include="Entitys\Cart.cs" />
+    <Compile Include="Entitys\Category.cs" />
+    <Compile Include="Entitys\EfContext.cs" />
+    <Compile Include="Entitys\Filter.cs" />
+    <Compile Include="Entitys\FilterName.cs" />
+    <Compile Include="Entitys\FilterNameGroups.cs" />
+    <Compile Include="Entitys\FilterValue.cs" />
+    <Compile Include="Entitys\Order.cs" />
+    <Compile Include="Entitys\OrderStatus.cs" />
+    <Compile Include="Entitys\Product.cs" />
+    <Compile Include="Entitys\ProductImage.cs" />
+    <Compile Include="Entitys\Role.cs" />
+    <Compile Include="Entitys\UserProfile.cs" />
+    <Compile Include="Migrations\201801221846007_create db and create table UserProfiles.cs" />
+    <Compile Include="Migrations\201801221846007_create db and create table UserProfiles.Designer.cs">
+      <DependentUpon>201801221846007_create db and create table UserProfiles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801241825220_Add table tblCarts.cs" />
+    <Compile Include="Migrations\201801241825220_Add table tblCarts.Designer.cs">
+      <DependentUpon>201801241825220_Add table tblCarts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801241900374_Add table tblOrderStatuses and tblOrders.cs" />
+    <Compile Include="Migrations\201801241900374_Add table tblOrderStatuses and tblOrders.Designer.cs">
+      <DependentUpon>201801241900374_Add table tblOrderStatuses and tblOrders.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801251651117_ Add table tblRoles.cs" />
+    <Compile Include="Migrations\201801251651117_ Add table tblRoles.Designer.cs">
+      <DependentUpon>201801251651117_ Add table tblRoles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801251744259_Add table tblProducts and tblFilterNames and tblFilterValues and tblFilters.cs" />
+    <Compile Include="Migrations\201801251744259_Add table tblProducts and tblFilterNames and tblFilterValues and tblFilters.Designer.cs">
+      <DependentUpon>201801251744259_Add table tblProducts and tblFilterNames and tblFilterValues and tblFilters.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801290936125_create table tblProducts and tblFilterNames and tblFilterValues and tblFilters and tblCategories.cs" />
+    <Compile Include="Migrations\201801290936125_create table tblProducts and tblFilterNames and tblFilterValues and tblFilters and tblCategories.Designer.cs">
+      <DependentUpon>201801290936125_create table tblProducts and tblFilterNames and tblFilterValues and tblFilters and tblCategories.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801291717305_create table tblFilterNameGruops.cs" />
+    <Compile Include="Migrations\201801291717305_create table tblFilterNameGruops.Designer.cs">
+      <DependentUpon>201801291717305_create table tblFilterNameGruops.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801301822412_init view vFilterNamesGroups.cs" />
+    <Compile Include="Migrations\201801301822412_init view vFilterNamesGroups.Designer.cs">
+      <DependentUpon>201801301822412_init view vFilterNamesGroups.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801301907168_init view vFilterNamesGroups 2.cs" />
+    <Compile Include="Migrations\201801301907168_init view vFilterNamesGroups 2.Designer.cs">
+      <DependentUpon>201801301907168_init view vFilterNamesGroups 2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802011730377_add view vFilterNamesGroups 3.cs" />
+    <Compile Include="Migrations\201802011730377_add view vFilterNamesGroups 3.Designer.cs">
+      <DependentUpon>201802011730377_add view vFilterNamesGroups 3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802071821503_add table tblProductImages.cs" />
+    <Compile Include="Migrations\201802071821503_add table tblProductImages.Designer.cs">
+      <DependentUpon>201802071821503_add table tblProductImages.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Migrations\Views\Filters\VFilterNameGroup.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201801221846007_create db and create table UserProfiles.resx">
+      <DependentUpon>201801221846007_create db and create table UserProfiles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801241825220_Add table tblCarts.resx">
+      <DependentUpon>201801241825220_Add table tblCarts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801241900374_Add table tblOrderStatuses and tblOrders.resx">
+      <DependentUpon>201801241900374_Add table tblOrderStatuses and tblOrders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801251651117_ Add table tblRoles.resx">
+      <DependentUpon>201801251651117_ Add table tblRoles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801251744259_Add table tblProducts and tblFilterNames and tblFilterValues and tblFilters.resx">
+      <DependentUpon>201801251744259_Add table tblProducts and tblFilterNames and tblFilterValues and tblFilters.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801290936125_create table tblProducts and tblFilterNames and tblFilterValues and tblFilters and tblCategories.resx">
+      <DependentUpon>201801290936125_create table tblProducts and tblFilterNames and tblFilterValues and tblFilters and tblCategories.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801291717305_create table tblFilterNameGruops.resx">
+      <DependentUpon>201801291717305_create table tblFilterNameGruops.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801301822412_init view vFilterNamesGroups.resx">
+      <DependentUpon>201801301822412_init view vFilterNamesGroups.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801301907168_init view vFilterNamesGroups 2.resx">
+      <DependentUpon>201801301907168_init view vFilterNamesGroups 2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802011730377_add view vFilterNamesGroups 3.resx">
+      <DependentUpon>201802011730377_add view vFilterNamesGroups 3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802071821503_add table tblProductImages.resx">
+      <DependentUpon>201802071821503_add table tblProductImages.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Migrations\ViewFilters\vFilterNamesGroups.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

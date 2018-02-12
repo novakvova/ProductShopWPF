@@ -1,0 +1,41 @@
+﻿<Window x:Class="WpfApp1.WindowAutoComplete"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:toolkit="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit"
+        xmlns:local="clr-namespace:WpfApp1"
+        mc:Ignorable="d"
+        Title="WindowAutoComplete" Height="300" Width="300">
+    <Window.Resources>
+        <DataTemplate x:Key="AutoCompleteBoxItemTemplate">
+            <StackPanel Orientation="Horizontal">
+                <Image Height="25" Width="25" Source= "{Binding PatchPicture}"/>
+                <Label
+                   Content="{Binding Id}"
+                   FontStyle="Italic"
+                   Foreground="DarkGray" />
+                
+                <Label Content="{Binding Name}"
+                      Width="100" />
+                <Label
+                   Content="{Binding Birthday}"
+                   FontStyle="Italic"
+                   Foreground="DarkGray" />
+            </StackPanel>
+        </DataTemplate>
+    </Window.Resources>
+    <StackPanel>
+        <Label Content="Текст"/>
+        <TextBox x:Name="txtBox1" Height="23" Margin="5" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top"/>
+        <toolkit:AutoCompleteBox Margin="5"
+           Height="23"
+           Name="tlACPeople"
+           ItemsSource="{Binding People}"
+           SelectedItem="{Binding SelectedPerson, Mode=TwoWay}"
+           ValueMemberPath="Name"
+           ItemTemplate="{StaticResource AutoCompleteBoxItemTemplate}" Populating="tlACPeople_Populating" SelectionChanged="tlACPeople_SelectionChanged" />
+        <Image x:Name="imgBox1" Height="165" Margin="5"/>
+
+    </StackPanel>
+</Window>

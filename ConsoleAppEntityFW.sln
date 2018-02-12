@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2010
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleAppEntityFW", "ConsoleAppEntityFW\ConsoleAppEntityFW.csproj", "{9FF316BE-1B4C-4D19-8904-022618963E4C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApp1", "WpfApp1\WpfApp1.csproj", "{61E096C1-27C8-4E4C-B3EF-D5083B43EF72}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL", "BLL\BLL.csproj", "{6067AA73-7C18-400D-8E5D-1B986679418A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9FF316BE-1B4C-4D19-8904-022618963E4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FF316BE-1B4C-4D19-8904-022618963E4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FF316BE-1B4C-4D19-8904-022618963E4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FF316BE-1B4C-4D19-8904-022618963E4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61E096C1-27C8-4E4C-B3EF-D5083B43EF72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61E096C1-27C8-4E4C-B3EF-D5083B43EF72}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61E096C1-27C8-4E4C-B3EF-D5083B43EF72}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61E096C1-27C8-4E4C-B3EF-D5083B43EF72}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6067AA73-7C18-400D-8E5D-1B986679418A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6067AA73-7C18-400D-8E5D-1B986679418A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6067AA73-7C18-400D-8E5D-1B986679418A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6067AA73-7C18-400D-8E5D-1B986679418A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {39A58BD6-CD70-481D-AFD6-697538431825}
+	EndGlobalSection
+EndGlobal
