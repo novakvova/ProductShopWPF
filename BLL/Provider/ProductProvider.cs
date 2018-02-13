@@ -6,11 +6,14 @@ using ConsoleAppEntityFW.Entitys;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media.Imaging;
 using WpfApp1;
 
 namespace BLL.Provider
@@ -47,17 +50,27 @@ namespace BLL.Provider
                     //MessageBox.Show(p.SourceOriginal);
                     string fOriginalName = Path.GetFileName(p.SourceOriginal);
                     string fOriginalPath = Path.GetDirectoryName(p.SourceOriginal);
-                    string fSmallName = Path.GetFileName(p.Source);
-                    string fSmallPath = Environment.CurrentDirectory + ConfigurationManager.AppSettings["ImagePath"].ToString();
+                    string fSmallName = Guid.NewGuid().ToString() + ".jpg"; //Path.GetFileName(p.Source);
+                    
+                    //string fSmallPath = Environment.CurrentDirectory + ConfigurationManager.AppSettings["ImagePath"].ToString();
                     string fImages = Environment.CurrentDirectory + ConfigurationManager.AppSettings["ImageStore"].ToString();
+                   
                     // Will not overwrite if the destination file already exists.
                     try
                     {
                         File.Copy(Path.Combine(fOriginalPath, fOriginalName), Path.Combine(fImages, "o_" + fSmallName));
                         imgTemp.Add("o_" + fSmallName);
-                        File.Copy(Path.Combine(fSmallPath, fSmallName), Path.Combine(fImages, "s_" + fSmallName));
-                        imgTemp.Add("s_" + fSmallName);
 
+                        using (FileStream stream = 
+                            new FileStream(Path.Combine(fImages, "s_" + fSmallName),
+                            FileMode.Create))
+                        {
+                            JpegBitmapEncoder encoder = new JpegBitmapEncoder();
+                            encoder.Frames.Add(p.ImageFrame);
+                            encoder.Save(stream);
+                            imgTemp.Add("s_" + fSmallName);
+                        }
+                        
                         ProductImage image = new ProductImage // сохраняем в таблицу ProductImages  
                         {
                             Name = fSmallName, // сохраняем имя без приставки
@@ -80,7 +93,24 @@ namespace BLL.Provider
             }
             return product;
         }
-
+        private Bitmap GetBitmap(BitmapSource source)
+        {
+            Bitmap bmp = new Bitmap(
+              source.PixelWidth,
+              source.PixelHeight,
+              PixelFormat.Format32bppPArgb);
+            BitmapData data = bmp.LockBits(
+              new Rectangle(System.Drawing.Point.Empty, bmp.Size),
+              ImageLockMode.WriteOnly,
+              PixelFormat.Format32bppPArgb);
+            source.CopyPixels(
+              Int32Rect.Empty,
+              data.Scan0,
+              data.Height * data.Stride,
+              data.Stride);
+            bmp.UnlockBits(data);
+            return bmp;
+        }
         public IQueryable<Product> GetAllProducts()
         {
             IQueryable<Product> allProducts = _productRepository.GetAll();
