@@ -24,7 +24,7 @@
                 <!-- Image Template -->
                 <Border Padding="4" Background="White" BorderBrush="#22000000" BorderThickness="1">
                     <StackPanel Orientation="Vertical">
-                        <Image Source="{Binding Source}"/>
+                        <Image Source="{Binding ImageFrame}"/>
                         <Label Content="{Binding ImageName}">
                             <!--<Label.ToolTip>
                                Only JPeg images with a stored thumbnail will display a thumbnail during preview.
