@@ -40,10 +40,10 @@ namespace BLL.Model
             }
         }
         
-        public Photo(ProductImage path) // конструктор получения изображений из базы
+        public Photo(ProductImageViewModel path) // конструктор получения изображений из базы
         {
-            _path = path.NameSmall;
-            _pathOriginal = path.NameOriginal;
+            _path = path.GetImageSmall;
+            _pathOriginal = path.GetImageOriginal;
         }
         
         public string Source { get { return _path; } } // путь на уменьшенную фотку

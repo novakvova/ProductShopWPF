@@ -32,11 +32,11 @@ namespace ConsoleAppEntityFW.Entitys
 
         public virtual ICollection<ProductImage> ProductImages { get; set; }
 
-        [NotMapped]
-        public string FirstImageSmall => ProductImages.FirstOrDefault().NameSmall;
+        //[NotMapped]
+        //public string FirstImageSmall => ProductImages.FirstOrDefault().NameSmall;
 
-        [NotMapped]
-        public string FirstImageOriginal => ProductImages.FirstOrDefault().NameOriginal;
+        //[NotMapped]
+        //public string FirstImageOriginal => ProductImages.FirstOrDefault().NameOriginal;
 
         public Product()
         {

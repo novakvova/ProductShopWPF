@@ -86,7 +86,7 @@
             <toolkit:AutoCompleteBox Margin="5" 
            Width="400"
            Name="tlACPeople"
-           ItemsSource="{Binding Product}"
+           ItemsSource="{Binding ProductItemViewModel}"
            SelectedItem="{Binding SelectedPerson, Mode=TwoWay}"
            ValueMemberPath="Name"
            ItemTemplate="{StaticResource AutoCompleteBoxItemTemplate}" Populating="tlACPeople_Populating" SelectionChanged="tlACPeople_SelectionChanged"/>

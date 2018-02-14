@@ -1,4 +1,5 @@
 ﻿using BLL.Abstract;
+using BLL.Model;
 using BLL.Provider;
 using ConsoleAppEntityFW.Entitys;
 using System;
@@ -31,7 +32,7 @@ namespace WpfApp1
         {
             InitializeComponent();
             _productProvider = new ProductProvider();
-            _productProvider.GetAllProducts();
+            //_productProvider.GetAllProducts();
             Photos = (BLL.Model.PhotoCollection)(this.Resources["Photos"] as ObjectDataProvider).Data;
         }
 
@@ -56,7 +57,10 @@ namespace WpfApp1
         private void tlACPeople_Populating(object sender, PopulatingEventArgs e)
         {
             string text = tlACPeople.Text;
-            var result = _productProvider.GetAllProductsByName(text).ToList();
+            var result = _productProvider.FindProducts(text);
+            //var result = _productProvider
+            //    .GetAllProductsByName(text)
+            //    .ToList();
             tlACPeople.ItemsSource = result;
             tlACPeople.PopulateComplete();
 
@@ -65,7 +69,7 @@ namespace WpfApp1
         {
             if (tlACPeople.SelectedItem != null)
             {
-                var product = tlACPeople.SelectedItem as Product;
+                var product = tlACPeople.SelectedItem as ProductItemViewModel;
                 lblProductName.Content = product.Name;
                 lblProductPrice.Content = product.Price;
                 lblProductQty.Content = product.Quantity;
@@ -73,6 +77,7 @@ namespace WpfApp1
                 {
                     Photos.Clear();
                 }
+                
                 Photos.AddProductImages(product.ProductImages);
                 ImageOfProduct.Source = new BitmapImage(new Uri(product.FirstImageOriginal));
                 //txtBox1.Text = (tlACPeople.SelectedItem as Person).Id.ToString();

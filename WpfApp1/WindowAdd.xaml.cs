@@ -69,69 +69,7 @@ namespace WpfApp1
             if(prod != null)
                 MessageBox.Show($"Продукт успешно сохранен. ID = {prod.Id.ToString()}");
 
-            #region OldAddCode
-            //foreach (var p in Photos)
-            //{
-            //    MessageBox.Show(p.SourceOriginal);
-            //}
-
-            //using (EfContext context = new EfContext())
-            //{
-            //Product product = new Product
-            //{
-            //    Name = TxtBoxName.Text,
-            //    CategoryId = (ComboCategory.SelectedItem as Category).Id,
-            //    Price = float.Parse(TxtBoxPrice.Text),
-            //    Quantity = int.Parse(TxtBoxQty.Text),
-            //    DateCreate = DateTime.Now,
-            //};
-            //context.Products.Add(product);
-            //context.SaveChanges();
-            //MessageBox.Show($"Id = {product.Id.ToString()}");
-            //if (Photos.Count > 0)
-            //{
-
-            //    List<string> imgTemp = new List<string>();
-            //    foreach (var p in Photos)
-            //    {
-            //        //MessageBox.Show(p.SourceOriginal);
-            //        string fOriginalName = Path.GetFileName(p.SourceOriginal);
-            //        string fOriginalPath = Path.GetDirectoryName(p.SourceOriginal);
-            //        string fSmallName = Path.GetFileName(p.Source);
-            //        string fSmallPath = Environment.CurrentDirectory + ConfigurationManager.AppSettings["ImagePath"].ToString();
-            //        string fImages = Environment.CurrentDirectory + ConfigurationManager.AppSettings["ImageStore"].ToString();
-            //        // Will not overwrite if the destination file already exists.
-            //        try
-            //        {
-            //            File.Copy(Path.Combine(fOriginalPath, fOriginalName), Path.Combine(fImages, "o_" + fSmallName));
-            //            imgTemp.Add("o_" + fSmallName);
-            //            File.Copy(Path.Combine(fSmallPath, fSmallName), Path.Combine(fImages, "s_" + fSmallName));
-            //            imgTemp.Add("s_" + fSmallName);
-
-            //            ProductImage image = new ProductImage // сохраняем в таблицу ProductImages  
-            //            {
-            //                Name = fSmallName,
-            //                ProductId = product.Id
-            //            };
-            //            context.ProductImages.Add(image);
-
-            //            // Catch exception if the file was already copied.
-            //        }
-            //        catch (IOException copyError)
-            //        {
-            //            MessageBox.Show(copyError.Message);
-            //            foreach (var item in imgTemp)
-            //            {
-            //                File.Delete(Path.Combine(fImages, item));
-            //            }
-            //            return;
-            //        }
-
-            //    }
-            //    context.SaveChanges();
-            //}
-            //}
-            #endregion
+            this.Close();
         }
 
         private void ButtonAddImage_Click(object sender, RoutedEventArgs e)

@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Imaging;
 using WpfApp1;
+using System.Data.Entity;
 
 namespace BLL.Provider
 {
@@ -47,33 +48,28 @@ namespace BLL.Provider
                 List<string> imgTemp = new List<string>();
                 foreach (var p in productAdd.Images)
                 {
-                    //MessageBox.Show(p.SourceOriginal);
-                    string fOriginalName = Path.GetFileName(p.SourceOriginal);
-                    string fOriginalPath = Path.GetDirectoryName(p.SourceOriginal);
-                    string fSmallName = Guid.NewGuid().ToString() + ".jpg"; //Path.GetFileName(p.Source);
-                    
-                    //string fSmallPath = Environment.CurrentDirectory + ConfigurationManager.AppSettings["ImagePath"].ToString();
+                    string fSaveName = Guid.NewGuid().ToString() + ".jpg"; //Path.GetFileName(p.Source);
                     string fImages = Environment.CurrentDirectory + ConfigurationManager.AppSettings["ImageStore"].ToString();
-                   
+                    string fSaveImageBig = "o_" + fSaveName;
+                    string fSaveImageSmall = "s_" + fSaveName;
                     // Will not overwrite if the destination file already exists.
                     try
                     {
-                        File.Copy(Path.Combine(fOriginalPath, fOriginalName), Path.Combine(fImages, "o_" + fSmallName));
-                        imgTemp.Add("o_" + fSmallName);
-
+                        File.Copy(p.SourceOriginal, Path.Combine(fImages, fSaveImageBig));
+                        imgTemp.Add(fSaveImageBig);
                         using (FileStream stream = 
-                            new FileStream(Path.Combine(fImages, "s_" + fSmallName),
+                            new FileStream(Path.Combine(fImages, fSaveImageSmall),
                             FileMode.Create))
                         {
                             JpegBitmapEncoder encoder = new JpegBitmapEncoder();
                             encoder.Frames.Add(p.ImageFrame);
                             encoder.Save(stream);
-                            imgTemp.Add("s_" + fSmallName);
+                            imgTemp.Add(fSaveImageSmall);
                         }
                         
                         ProductImage image = new ProductImage // сохраняем в таблицу ProductImages  
                         {
-                            Name = fSmallName, // сохраняем имя без приставки
+                            Name = fSaveName, // сохраняем имя без приставки
                             ProductId = product.Id
                         };
                         _productImageRepository.Add(image);
@@ -114,13 +110,7 @@ namespace BLL.Provider
         public IQueryable<Product> GetAllProducts()
         {
             IQueryable<Product> allProducts = _productRepository.GetAll();
-            //foreach (Product product in allProducts)
-            //{
-            //    foreach (ProductImage item in _productImageRepository.GetAll(product.Id))
-            //    {
-            //        product.ProductImages.Add(item);
-            //    }
-            //}
+            
             return allProducts;
         }
 
@@ -139,6 +129,31 @@ namespace BLL.Provider
         public void RemoveProduct(int productId)
         {
             throw new NotImplementedException();
+        }
+
+        public IList<ProductItemViewModel> FindProducts(string name)
+        {
+            var model = _productRepository
+                .GetAll()
+                .Include(c=>c.Categories)
+                .Include(i=>i.ProductImages)
+                .Where(p=>p.Name.StartsWith(name))
+                .Select(p => new ProductItemViewModel
+                {
+                    Id=p.Id,
+                    Name=p.Name,
+                    Category=p.Categories.Name,
+                    Price=p.Price,
+                    DateCreate=p.DateCreate,
+                    Quantity=p.Quantity,
+                    ProductImages=p.ProductImages
+                    .Select(i=>new ProductImageViewModel
+                    {
+                        Id=i.Id,
+                        Name=i.Name
+                    }).ToList()
+                }).ToList();
+            return model;
         }
     }
 }

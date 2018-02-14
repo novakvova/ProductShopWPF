@@ -16,6 +16,7 @@ namespace BLL.Abstract
         IQueryable<Product> GetAllProducts();
 
         IQueryable<Product> GetAllProductsByName(string name);
+        IList<ProductItemViewModel> FindProducts(string name);
         void RemoveProduct(int productId);
     }
 }

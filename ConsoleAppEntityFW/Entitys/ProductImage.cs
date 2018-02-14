@@ -24,11 +24,5 @@ namespace ConsoleAppEntityFW.Entitys
         public int ProductId { get; set; }
 
         public Product Product { get; set; }
-
-        [NotMapped]
-        public string NameSmall => Name != null ? (Environment.CurrentDirectory + ConfigurationManager.AppSettings["ImageStore"].ToString() + "s_" + Name) : null;
-
-        [NotMapped]
-        public string NameOriginal => Environment.CurrentDirectory + ConfigurationManager.AppSettings["ImageStore"].ToString() + "o_" + Name;
     }
 }
