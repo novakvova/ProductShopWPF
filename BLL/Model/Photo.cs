@@ -27,26 +27,30 @@ namespace BLL.Model
             _pathOriginal = path;
            using (var image = System.Drawing.Image.FromFile(_pathOriginal))
             {
-                var newImageSmall = ImageWorker.ConverImageToBitmap(image, 130, 130);
-                if (newImageSmall != null)
+                using (var newImageSmall = ImageWorker.ConverImageToBitmap(image, 130, 130))
                 {
-                    using (MemoryStream ms = new MemoryStream())
+                    if (newImageSmall != null)
                     {
-                        newImageSmall.Save(ms,ImageFormat.Bmp);
-                        _image = BitmapFrame.Create(ms, 
-                            BitmapCreateOptions.PreservePixelFormat, 
-                            BitmapCacheOption.OnLoad);
+                        using (MemoryStream ms = new MemoryStream())
+                        {
+                            newImageSmall.Save(ms, ImageFormat.Bmp);
+                            _image = BitmapFrame.Create(ms,
+                                BitmapCreateOptions.PreservePixelFormat,
+                                BitmapCacheOption.OnLoad);
+                        }
                     }
                 }
-                var newImageOrigin = ImageWorker.ConverImageToBitmap(image, image.Width, image.Height);
-                if (newImageOrigin != null)
+                using (var newImageOrigin = ImageWorker.ConverImageToBitmap(image, image.Width, image.Height))
                 {
-                    using (MemoryStream ms = new MemoryStream())
+                    if (newImageOrigin != null)
                     {
-                        newImageOrigin.Save(ms, ImageFormat.Bmp);
-                        _imageOrigin = BitmapFrame.Create(ms,
-                            BitmapCreateOptions.PreservePixelFormat,
-                            BitmapCacheOption.OnLoad);
+                        using (MemoryStream ms = new MemoryStream())
+                        {
+                            newImageOrigin.Save(ms, ImageFormat.Bmp);
+                            _imageOrigin = BitmapFrame.Create(ms,
+                                BitmapCreateOptions.PreservePixelFormat,
+                                BitmapCacheOption.OnLoad);
+                        }
                     }
                 }
             }
@@ -60,26 +64,30 @@ namespace BLL.Model
             
             using (var image = System.Drawing.Image.FromFile(_pathOriginal))
             {
-                var newImageSmall = ImageWorker.ConverImageToBitmap(image, 130, 130);
-                if (newImageSmall != null)
+                using (var newImageSmall = ImageWorker.ConverImageToBitmap(image, 130, 130))
                 {
-                    using (MemoryStream ms = new MemoryStream())
+                    if (newImageSmall != null)
                     {
-                        newImageSmall.Save(ms, ImageFormat.Bmp);
-                        _image = BitmapFrame.Create(ms,
-                            BitmapCreateOptions.PreservePixelFormat,
-                            BitmapCacheOption.OnLoad);
+                        using (MemoryStream ms = new MemoryStream())
+                        {
+                            newImageSmall.Save(ms, ImageFormat.Bmp);
+                            _image = BitmapFrame.Create(ms,
+                                BitmapCreateOptions.PreservePixelFormat,
+                                BitmapCacheOption.OnLoad);
+                        }
                     }
                 }
-                var newImageOrigin = ImageWorker.ConverImageToBitmap(image, image.Width, image.Height);
-                if (newImageOrigin != null)
+                using (var newImageOrigin = ImageWorker.ConverImageToBitmap(image, image.Width, image.Height))
                 {
-                    using (MemoryStream ms = new MemoryStream())
+                    if (newImageOrigin != null)
                     {
-                        newImageOrigin.Save(ms, ImageFormat.Bmp);
-                        _imageOrigin = BitmapFrame.Create(ms,
-                            BitmapCreateOptions.PreservePixelFormat,
-                            BitmapCacheOption.OnLoad);
+                        using (MemoryStream ms = new MemoryStream())
+                        {
+                            newImageOrigin.Save(ms, ImageFormat.Bmp);
+                            _imageOrigin = BitmapFrame.Create(ms,
+                                BitmapCreateOptions.PreservePixelFormat,
+                                BitmapCacheOption.OnLoad);
+                        }
                     }
                 }
             }

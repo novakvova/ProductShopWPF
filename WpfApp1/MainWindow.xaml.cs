@@ -23,7 +23,7 @@ namespace WpfApp1
     /// Interaction logic for MainWindow.xaml
     /// </summary>
 
-    
+
     public partial class MainWindow : Window
     {
         private readonly IProductProvider _productProvider;
@@ -76,22 +76,41 @@ namespace WpfApp1
                 {
                     Photos.Clear();
                 }
-                
+
                 Photos.AddProductImages(product.ProductImages);
                 ImageOfProduct.Source = product.FirstImageOriginal;//new Uri(product.FirstImageOriginal));
-               
+
             }
         }
 
         private void PhotosListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-           if(tlACPeople.SelectedItem != null)
-           {
+            if (tlACPeople.SelectedItem != null)
+            {
                 if (PhotosListBox.SelectedIndex != -1)
                 {
                     ImageOfProduct.Source = ((Photo)PhotosListBox.SelectedItem).ImageFrameOrigin;
                 }
             }
+        }
+
+        private void btnDel_Click(object sender, RoutedEventArgs e)
+        {
+            //_productProvider.RemoveProduct(1008);
+            //_productProvider.RemoveProduct(1004);
+            if (tlACPeople.SelectedItem != null)
+            {
+                var product = tlACPeople.SelectedItem as ProductItemViewModel;
+                MessageBoxResult rez =
+                    MessageBox.Show("Ви дійсно бажаєте видалити продукт \"" + product.Name + "\" з бази?", "Видалення товару", MessageBoxButton.YesNo, MessageBoxImage.Information);
+                if (rez == MessageBoxResult.Yes)
+                {
+                    _productProvider.RemoveProduct(product.Id);
+
+                }
+            }
+
+
         }
     }
 }

@@ -128,7 +128,34 @@ namespace BLL.Provider
         }
         public void RemoveProduct(int productId)
         {
-            throw new NotImplementedException();
+            Product prodDelete = _productRepository.GetAll()
+                .Include(p => p.ProductImages)
+                .SingleOrDefault(p=>p.Id==productId);
+                
+            if (prodDelete != null)
+            {
+                string path= Environment.CurrentDirectory +
+                    ConfigurationManager.AppSettings["ImageStore"].ToString();
+                foreach (var item in prodDelete.ProductImages.ToList()) // удаляем фотки из папки
+                {
+                    string imageOrigin= path+"o_" + item.Name;
+                    File.Delete(imageOrigin);
+                    string imageSmall = path + "s_" + item.Name;
+                    File.Delete(imageSmall);
+                    var prodImage = _productImageRepository
+                        .GetAll(prodDelete.Id)
+                        .SingleOrDefault(pi => pi.Id == item.Id);
+                    if(prodImage!=null)
+                    {
+                        _productImageRepository.Remove(prodImage);
+                        _productImageRepository.SaveChanges();
+                    }
+                }
+                //_productImageRepository.Remove();
+                //_productImageRepository.SaveChanges();
+                //_productRepository.Remove(prodDelete);
+                //_productRepository.SaveChanges();
+            };
         }
 
         public IList<ProductItemViewModel> FindProducts(string name, 

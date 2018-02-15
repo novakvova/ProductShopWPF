@@ -26,6 +26,7 @@ namespace WpfApp1
         {
             return _context.Products.AsQueryable();
         }
+        
 
         public Product GetByName(string name)
         {

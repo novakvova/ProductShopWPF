@@ -26,7 +26,7 @@
                 <!-- Image Template -->
                 <Border Padding="3" Background="#22000000" BorderBrush="#22000000" BorderThickness="1">
                     <StackPanel Orientation="Vertical">
-                        <Image Source="{Binding Source}"/>
+                        <Image Source="{Binding ImageFrame}"/>
                         <!--<Label Content="{Binding ImageName}">-->
                             <!--<Label.ToolTip>
                                Only JPeg images with a stored thumbnail will display a thumbnail during preview.
@@ -146,6 +146,7 @@
             </Grid>
         </Grid>
         <Grid Margin="5,0,5,5" Background="#FFFFE7E7">
+            <Button x:Name="btnDel" Content="TestDel" HorizontalAlignment="Left" Margin="83,31,0,0" VerticalAlignment="Top" Width="75" Click="btnDel_Click"/>
 
         </Grid>
     </DockPanel>
