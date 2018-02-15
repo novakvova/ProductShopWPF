@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +13,8 @@ namespace BLL.Model
 {
     public class ProductItemViewModel
     {
+        private BitmapFrame _imageSmall;
+        private BitmapFrame _imageOriginal;
         public int Id { get; set; }
 
         public string Name { get; set; }
@@ -25,7 +29,7 @@ namespace BLL.Model
         //Імена фоток
         public List<ProductImageViewModel> ProductImages { get; set; }
         
-        public string FirstImageSmall
+        public BitmapFrame FirstImageSmall
         {
             get
             {
@@ -35,12 +39,27 @@ namespace BLL.Model
                 var image = ProductImages.FirstOrDefault();
                 if (image != null)
                     imageName = image.Name;
-                return imagePath + "s_" + imageName;
+                string pathInput = imagePath + "s_" + imageName;
+                using (var imageNew = System.Drawing.Image.FromFile(pathInput))
+                {
+                    var newImageSmall = ImageWorker.ConverImageToBitmap(imageNew, 130, 130);
+                    if (newImageSmall != null)
+                    {
+                        using (MemoryStream ms = new MemoryStream())
+                        {
+                            newImageSmall.Save(ms, ImageFormat.Bmp);
+                            _imageSmall = BitmapFrame.Create(ms,
+                                BitmapCreateOptions.PreservePixelFormat,
+                                BitmapCacheOption.OnLoad);
+                        }
+                    }
+                }
+                return _imageSmall;
             }
         }
 
 
-        public string FirstImageOriginal
+        public BitmapFrame FirstImageOriginal
         {
             get
             {
@@ -50,7 +69,22 @@ namespace BLL.Model
                 var image = ProductImages.FirstOrDefault();
                 if (image != null)
                     imageName = image.Name;
-                return imagePath + "o_" + imageName;
+                string pathInput = imagePath + "o_" + imageName;
+                using (var imageNew = System.Drawing.Image.FromFile(pathInput))
+                {
+                    var newImageOrigin = ImageWorker.ConverImageToBitmap(imageNew, imageNew.Width, imageNew.Height);
+                    if (newImageOrigin != null)
+                    {
+                        using (MemoryStream ms = new MemoryStream())
+                        {
+                            newImageOrigin.Save(ms, ImageFormat.Bmp);
+                            _imageOriginal = BitmapFrame.Create(ms,
+                                BitmapCreateOptions.PreservePixelFormat,
+                                BitmapCacheOption.OnLoad);
+                        }
+                    }
+                }
+                return _imageOriginal;
             }
         }
 

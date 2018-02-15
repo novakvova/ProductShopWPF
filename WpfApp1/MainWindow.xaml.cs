@@ -78,7 +78,7 @@ namespace WpfApp1
                 }
                 
                 Photos.AddProductImages(product.ProductImages);
-                ImageOfProduct.Source = new BitmapImage(new Uri(product.FirstImageOriginal));
+                ImageOfProduct.Source = product.FirstImageOriginal;//new Uri(product.FirstImageOriginal));
                
             }
         }
@@ -89,7 +89,7 @@ namespace WpfApp1
            {
                 if (PhotosListBox.SelectedIndex != -1)
                 {
-                    ImageOfProduct.Source = new BitmapImage(new Uri(((Photo)PhotosListBox.SelectedItem).SourceOriginal));
+                    ImageOfProduct.Source = ((Photo)PhotosListBox.SelectedItem).ImageFrameOrigin;
                 }
             }
         }
