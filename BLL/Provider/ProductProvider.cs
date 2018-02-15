@@ -131,13 +131,16 @@ namespace BLL.Provider
             throw new NotImplementedException();
         }
 
-        public IList<ProductItemViewModel> FindProducts(string name)
+        public IList<ProductItemViewModel> FindProducts(string name, 
+            int getCount = 2)
         {
             var model = _productRepository
                 .GetAll()
                 .Include(c=>c.Categories)
                 .Include(i=>i.ProductImages)
                 .Where(p=>p.Name.StartsWith(name))
+                .OrderBy(p=>p.Name)
+                .Take(getCount)
                 .Select(p => new ProductItemViewModel
                 {
                     Id=p.Id,
@@ -154,6 +157,17 @@ namespace BLL.Provider
                     }).ToList()
                 }).ToList();
             return model;
+        }
+        public int CountFindProducts(string name)
+        {
+            var countProduct = _productRepository
+                .GetAll()
+                .Include(c => c.Categories)
+                .Include(i => i.ProductImages)
+                .Where(p => p.Name.StartsWith(name))
+                .Count();
+                
+            return countProduct;
         }
     }
 }

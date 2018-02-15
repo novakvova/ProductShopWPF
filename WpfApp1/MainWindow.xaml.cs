@@ -57,10 +57,9 @@ namespace WpfApp1
         private void tlACPeople_Populating(object sender, PopulatingEventArgs e)
         {
             string text = tlACPeople.Text;
+            var count = _productProvider.CountFindProducts(text);
             var result = _productProvider.FindProducts(text);
-            //var result = _productProvider
-            //    .GetAllProductsByName(text)
-            //    .ToList();
+
             tlACPeople.ItemsSource = result;
             tlACPeople.PopulateComplete();
 
@@ -80,14 +79,19 @@ namespace WpfApp1
                 
                 Photos.AddProductImages(product.ProductImages);
                 ImageOfProduct.Source = new BitmapImage(new Uri(product.FirstImageOriginal));
-                //txtBox1.Text = (tlACPeople.SelectedItem as Person).Id.ToString();
-                //imgBox1.Source = new BitmapImage(new Uri((tlACPeople.SelectedItem as Person).PatchPicture.ToString()));
+               
             }
         }
 
         private void PhotosListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+           if(tlACPeople.SelectedItem != null)
+           {
+                if (PhotosListBox.SelectedIndex != -1)
+                {
+                    ImageOfProduct.Source = new BitmapImage(new Uri(((Photo)PhotosListBox.SelectedItem).SourceOriginal));
+                }
+            }
         }
     }
 }
